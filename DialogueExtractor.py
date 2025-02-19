@@ -6,12 +6,12 @@ from moviepy.video.io.VideoFileClip import VideoFileClip
 from moviepy.audio.AudioClip import concatenate_audioclips
 from TimeStamp import TimeStamp
 
-def extract_dialogue(subs_path, video_path, result_path):
-    sub_times = _format_subs(subs_path)
+def extract_dialogue(subs_path, video_path, result_path, tolerance = 3):
+    sub_times = _format_subs(subs_path, tolerance)
     print("Subs converted...")
     _generate_audio(sub_times, video_path, result_path)
 
-def _format_subs(subs_path, tolerance = 3):
+def _format_subs(subs_path, tolerance):
     """
     Chooses the appropriate function based on the subtitle file.
     """
@@ -107,7 +107,7 @@ def _generate_audio(sub_times, video_path, result_path):
         if sub[1] > final_timestamp:
             sub[1] = final_timestamp
         n += 1
-        clip = episode.subclip(str(sub[0]), str(sub[1]))
+        clip = episode.subclipped(str(sub[0]), str(sub[1]))
         audio.append(clip)
 
 

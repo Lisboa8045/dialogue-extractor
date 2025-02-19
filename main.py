@@ -44,14 +44,20 @@ class App(Tk):
         for child in self.mainframe.winfo_children(): 
             child.grid_configure(padx=5, pady=5)
 
+        # Tolerance to merge voicelines (in seconds)
+        self.tolerance = IntVar()
+        self.tolerance.set(3)
+        ttk.Label(self.mainframe, text="Tolerance (in seconds):").grid(column=1, row=5, sticky=E)
+        ttk.Spinbox(self.mainframe, from_=1.0, to=100.0, textvariable=self.tolerance, state="readonly").grid(column=2, row=5)
+
         # Start Button
-        ttk.Button(self.mainframe, text="Start Conversion", command=self.calculate).grid(column=2, row=5, sticky=W)
+        ttk.Button(self.mainframe, text="Start Conversion", command=self.calculate).grid(column=4, row=6, sticky=W)
         
 
     def calculate(self):
         try:
             print("Command received...")
-            extract_dialogue(self.subs_path.get(), self.video_path.get(), f"{self.result_path.get()}/{self.output_file.get()}.mp3")
+            extract_dialogue(self.subs_path.get(), self.video_path.get(), f"{self.result_path.get()}/{self.output_file.get()}.mp3", self.tolerance.get())
         except ValueError:
             pass
 

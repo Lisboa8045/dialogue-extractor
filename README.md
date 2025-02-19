@@ -5,11 +5,9 @@ This utility takes a given video and corresponding subtitles, and returns an aud
 
 ## Things to Implement
 
-- Support for other subtitle formats besides _*.srt_.
 - Progress bar to show up for GUI.
 - Batch processing of videos.
 - More fine control over how and when content is cut. For example:
-    - Tolerance between voice lines.
     - Ability to remove non voice lines.
     - Ability to sync subtitles if needed.
 - Make this into executable
